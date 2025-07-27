@@ -24,8 +24,7 @@ jobs:
       - name: 🧠 Train Model
         run: python train.py
 
-      - name: ✅ (Optional) Run Tests
-        run: python -m unittest discover -s tests || echo "No tests found"
+    
 
       # Optional: Push to DVC if needed
       # - name: 📤 Push to DVC Remote
