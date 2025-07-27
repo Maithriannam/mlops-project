@@ -2,27 +2,31 @@ name: CI/CD Pipeline 🚀
 
 on:
   push:
-    branches: [ main ]  # Will trigger only when you push to main
+    branches: [ main ]  # Triggers only on main branch pushes
 
 jobs:
   build-and-train:
     runs-on: ubuntu-latest
 
     steps:
-    - name: ⬇️ Checkout Code
-      uses: actions/checkout@v3
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v3
 
-    - name: ⚙️ Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: ⚙️ Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: 📦 Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: ✅ Train the Model
-      run: |
-        ls -la
-        python train.py
+      - name: ✅ Train the Model
+        run: |
+          ls -la
+          python train.py
+
+      - name: 🧪 Test the Trained Model
+        run: |
+          python src/test_model.py
