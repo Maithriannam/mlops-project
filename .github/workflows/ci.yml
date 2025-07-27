@@ -2,10 +2,10 @@ name: CI/CD Pipeline 🚀
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]  # Runs when you push to the main branch
 
 jobs:
-  build-and-deploy:
+  build-and-train:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +22,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: ✅ Train Model
+    - name: ✅ Train the Model
       run: |
-        ls  # Just to verify files
+        echo "🏁 Starting model training..."
+        ls -R  # Just to verify file structure
         python train.py
+
+    - name: 📤 Upload Model and Visuals
+      uses: actions/upload-artifact@v4
+      with:
+        name: trained-artifacts
+        path: |
+          models/
+          visuals/
+
 
