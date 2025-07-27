@@ -2,7 +2,7 @@ name: CI/CD Pipeline 🚀
 
 on:
   push:
-    branches: [ main ]  # Runs when you push to the main branch
+    branches: [ main ]  # Will trigger only when you push to main
 
 jobs:
   build-and-train:
@@ -24,16 +24,5 @@ jobs:
 
     - name: ✅ Train the Model
       run: |
-        echo "🏁 Starting model training..."
-        ls -R  # Just to verify file structure
+        ls -la
         python train.py
-
-    - name: 📤 Upload Model and Visuals
-      uses: actions/upload-artifact@v4
-      with:
-        name: trained-artifacts
-        path: |
-          models/
-          visuals/
-
-
